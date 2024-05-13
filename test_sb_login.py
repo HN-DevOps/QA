@@ -9,30 +9,6 @@ from selenium.webdriver.common.action_chains import ActionChains  # library for 
 from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 
-# Check if selenium package is installed
-if ! python3.12 -c "import selenium" >/dev/null 2>&1; then
-    echo "Selenium is not installed. Installing..."
-    python3.12 -m pip install --user selenium
-else
-    echo "Selenium is already installed."
-fi
-
-# Check if pytest package is installed
-if ! python3.12 -c "import pytest" >/dev/null 2>&1; then
-    echo "Pytest is not installed. Installing..."
-    python3.12 -m pip install --user pytest
-else
-    echo "Pytest is already installed."
-fi
-
-# Check if webdriver-manager package is installed
-if ! python3.12 -c "import webdriver_manager" >/dev/null 2>&1; then
-    echo "Webdriver-manager is not installed. Installing..."
-    python3.12 -m pip install --user webdriver-manager
-else
-    echo "Webdriver-manager is already installed."
-fi
-
 
 @pytest.fixture()
 def fixture_setup():  # after fixture what we will be writing will execute before testcase.
