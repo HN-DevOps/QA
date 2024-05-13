@@ -18,11 +18,8 @@ steps:
     python3.12 -m pip install --upgrade pip
     echo "Installing pytest..."
     python3.12 -m pip install pytest
-    echo "Installing dependencies from requirements.txt..."
-    python3.12 -m pip install -r requirements.txt
     echo "Installing Selenium and required packages..."
     python3.12 -m pip install selenium pytest webdriver-manager
     echo "Running tests with pytest..."
     python3.12 -m pytest test_sb_login.py
-    run: python test_sb_login.py
   displayName: 'Run Selenium Tests with Python 3.12'
