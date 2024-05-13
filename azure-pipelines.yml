@@ -23,5 +23,5 @@ steps:
     echo "Installing Selenium and required packages..."
     python3.12 -m pip install selenium pytest webdriver-manager
     echo "Running tests with pytest..."
-    python3.12 -m pytest /test_sb_login.py
+    python3.12 -m pytest test_sb_login.py
   displayName: 'Run Selenium Tests with Python 3.12'
