@@ -4,15 +4,18 @@ trigger:
       - main
 
 pool:
-  name: self-hosted  # Use a self-hosted agent
+  name: self-hosted  # Use your self-hosted agent
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.12'
-    addToPath: true
-
 - script: |
-    pip install -r requirements.txt
-    pytest tests/test_sb_twin.py
-  displayName: 'Run Selenium Tests'
+    echo "Checking Python version..."
+    python3.12 --version
+    echo "Ensuring pip is installed..."
+    python3.12 -m ensurepip
+    echo "Upgrading pip..."
+    python3.12 -m pip install --upgrade pip
+    echo "Installing dependencies from requirements.txt..."
+    python3.12 -m pip install -r requirements.txt
+    echo "Running tests with pytest..."
+    python3.12 -m pytest tests/test_sb_twin.py
+  displayName: 'Run Selenium Tests with Python 3.12'
