@@ -10,12 +10,18 @@ steps:
 - script: |
     echo "Checking Python version..."
     python3.12 --version
+    echo "Installing distutils..."
+    sudo apt-get install python3.12-distutils -y
     echo "Ensuring pip is installed..."
     python3.12 -m ensurepip
     echo "Upgrading pip..."
     python3.12 -m pip install --upgrade pip
+    echo "Installing pytest..."
+    python3.12 -m pip install pytest
     echo "Installing dependencies from requirements.txt..."
     python3.12 -m pip install -r requirements.txt
+    echo "Installing Selenium and required packages..."
+    python3.12 -m pip install selenium pytest webdriver-manager
     echo "Running tests with pytest..."
     python3.12 -m pytest tests/test_sb_login.py
   displayName: 'Run Selenium Tests with Python 3.12'
