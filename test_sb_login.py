@@ -13,7 +13,7 @@ import pytest
 def fixture_setup():  # after fixture what we will be writing will execute before testcase.
     global driver
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))  # give the version of chrome in install () here
-    driver.get("https://new-app-sbtwin-uae.azurewebsites.net/")  # hitting the url
+    driver.get("https://saas-sbdt-dev-app-web-du-uae.azurewebsites.net/#/Login")  # hitting the url
     driver.maximize_window()  # for maximizing the window
     yield  # after yield what we will be writing will execute after testcase.
     driver.close()
@@ -25,19 +25,19 @@ def test_sb_login(fixture_setup):
     wait = WebDriverWait(driver, 10)
     time.sleep(4)
 
-    email = wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/form/div[1]/input")))
+    email = wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/div/form/div[1]/input")))
     time.sleep(4)
-    email.send_keys("abdullah.amer@hypernymbiz.com")
+    email.send_keys("mujtabaaziz@yopmail.com")
     time.sleep(4)
 
-    password = driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/form/div[2]/input")
+    password = driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/div/form/div[2]/input")
     time.sleep(4)
     # scroll_to_element(password)  # scrolling to password field
-    password.send_keys("P2HqGITNMkQ(")
-    time.sleep(4)
+    password.send_keys("Aa123456@")
+    time.sleep(2)
 
-    view_password_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#root > div > div > div.LoginPresentation_loginWrapper__tX6Rr > div > div > form > div:nth-child(2) > div")))
-    time.sleep(4)
+    view_password_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "html > body > div:first-of-type > div > div > div:nth-of-type(2) > div > div > div > form > div:nth-of-type(2) > div > svg")))
+    time.sleep(2)
     # scroll_to_element(view_password_button)
     ActionChains(driver).move_to_element(view_password_button).click().perform()  # for moving cursor to perform action
     time.sleep(2)
@@ -46,13 +46,13 @@ def test_sb_login(fixture_setup):
     # if not remember_me_checkbox.is_selected():
         # remember_me_checkbox.click()
 
-    login_button = driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/form/button")
+    login_button = driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/div/form/button")
     time.sleep(4)
     # scroll_to_element(login_button)
     ActionChains(driver).move_to_element(login_button).click().perform()  # for moving cursor to perform action
     time.sleep(4)
 
-    select_building = wait.until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/section[1]/div/div/div/div/div[1]/div/div/div/button")))
+    select_building = wait.until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/section/div/div/div/div[3]/div/div/div/div/div/button")))
     time.sleep(2)
     ActionChains(driver).move_to_element(select_building).click().perform()
     time.sleep(3)
@@ -69,7 +69,10 @@ def test_sb_login(fixture_setup):
     driver.back()
     time.sleep(3)
 
-    logout_button = wait.until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/header/nav/div/div/div[3]/form/ul/li[1]/button")))
+    driver.execute_script("window.scrollTo(0, 0);")
+    time.sleep(2)
+
+    logout_button = wait.until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/header/nav/div/div/div[3]/form/ul/li[2]/button")))
     time.sleep(3)
     # scroll_to_element(logout_button)
     ActionChains(driver).move_to_element(logout_button).click().perform()
