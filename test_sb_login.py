@@ -1,5 +1,4 @@
 import time  # for importing libraries for time
-import os
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -11,16 +10,8 @@ import pytest
 
 @pytest.fixture()
 def fixture_setup():
-    headless = os.getenv('HEADLESS', 'false').lower() == 'true'
-    options = webdriver.ChromeOptions()
-    if headless:
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-
     global driver
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options
-    #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))  # give the version of chrome in install () here
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))  # give the version of chrome in install () here
     driver.get("https://saas-sbdt-dev-app-web-du-uae.azurewebsites.net/#/Login")  # hitting the url
     driver.maximize_window()  # for maximizing the window
     yield  # after yield what we will be writing will execute after testcase.
