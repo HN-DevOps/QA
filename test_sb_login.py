@@ -10,14 +10,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 
 @pytest.fixture()
-def fixture_setup():  # after fixture what we will be writing will execute before testcase.
-     headless = os.getenv('HEADLESS', 'false').lower() == 'true'
-    options = webdriver.ChromeOptions()
-    if headless:
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-
     global driver
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))  # give the version of chrome in install () here
     driver.get("https://saas-sbdt-dev-app-web-du-uae.azurewebsites.net/#/Login")  # hitting the url
