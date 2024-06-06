@@ -9,7 +9,6 @@ from selenium.webdriver.common.action_chains import ActionChains  # library for 
 from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 
-
 @pytest.fixture()
 def fixture_setup():  # after fixture what we will be writing will execute before testcase.
     global driver
