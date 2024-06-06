@@ -10,6 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 
 @pytest.fixture()
+def fixture_setup():
     headless = os.getenv('HEADLESS', 'false').lower() == 'true'
     options = webdriver.ChromeOptions()
     if headless:
