@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent  Staging Node Runner
 
     environment {
         VIRTUAL_ENV = 'env'
