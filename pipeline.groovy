@@ -1,5 +1,5 @@
 pipeline {
-    agent   { label 'Staging Node Runner' } 
+    agent { label 'Staging Node Runner' }
 
     environment {
         VIRTUAL_ENV = 'env'
@@ -18,12 +18,12 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat "python -m venv ${VIRTUAL_ENV}"
+                        sh "python3 -m venv ${VIRTUAL_ENV}"
                     } catch (Exception e) {
                         echo "Failed to create virtual environment: ${e.message}"
                         error("Failed to create virtual environment")
                     }
-                    bat "cmd /c ${VIRTUAL_ENV}\\Scripts\\activate"
+                    sh "source ${VIRTUAL_ENV}/bin/activate"
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat "cmd /c ${VIRTUAL_ENV}\\Scripts\\activate && python -m pip install --upgrade pip && python -m pip install -r requirements.txt"
+                        sh "source ${VIRTUAL_ENV}/bin/activate && python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt"
                     } catch (Exception e) {
                         echo "Failed to install dependencies: ${e.message}"
                         error("Failed to install dependencies")
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat "cmd /c ${VIRTUAL_ENV}\\Scripts\\activate && pytest"
+                        sh "source ${VIRTUAL_ENV}/bin/activate && pytest"
                     } catch (Exception e) {
                         echo "Failed to run tests: ${e.message}"
                         error("Failed to run tests")
