@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'Staging Node Runner' }
 
-    environment { 
+    environment {
         VIRTUAL_ENV = 'env'
         GIT_URL = 'https://github.com/NajlaGIT/SB-twin.git'
         BRANCH = 'main'
@@ -18,12 +18,15 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "python3 -m venv ${VIRTUAL_ENV}"
+                        sh """
+                            #!/bin/bash
+                            python3 -m venv ${VIRTUAL_ENV}
+                            source ${VIRTUAL_ENV}/bin/activate
+                        """
                     } catch (Exception e) {
                         echo "Failed to create virtual environment: ${e.message}"
                         error("Failed to create virtual environment")
                     }
-                    sh "source ${VIRTUAL_ENV}/bin/activate"
                 }
             }
         }
@@ -32,7 +35,12 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "source ${VIRTUAL_ENV}/bin/activate && python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt"
+                        sh """
+                            #!/bin/bash
+                            source ${VIRTUAL_ENV}/bin/activate
+                            python3 -m pip install --upgrade pip
+                            python3 -m pip install -r requirements.txt
+                        """
                     } catch (Exception e) {
                         echo "Failed to install dependencies: ${e.message}"
                         error("Failed to install dependencies")
@@ -45,7 +53,11 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "source ${VIRTUAL_ENV}/bin/activate && pytest"
+                        sh """
+                            #!/bin/bash
+                            source ${VIRTUAL_ENV}/bin/activate
+                            pytest
+                        """
                     } catch (Exception e) {
                         echo "Failed to run tests: ${e.message}"
                         error("Failed to run tests")
