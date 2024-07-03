@@ -21,7 +21,7 @@ pipeline {
                         sh """
                             #!/bin/bash
                             python3 -m venv ${VIRTUAL_ENV}
-                            source ${VIRTUAL_ENV}/bin/activate
+                            . ${VIRTUAL_ENV}/bin/activate
                         """
                     } catch (Exception e) {
                         echo "Failed to create virtual environment: ${e.message}"
@@ -37,7 +37,7 @@ pipeline {
                     try {
                         sh """
                             #!/bin/bash
-                            source ${VIRTUAL_ENV}/bin/activate
+                            . ${VIRTUAL_ENV}/bin/activate
                             python3 -m pip install --upgrade pip
                             python3 -m pip install -r requirements.txt
                         """
@@ -55,7 +55,7 @@ pipeline {
                     try {
                         sh """
                             #!/bin/bash
-                            source ${VIRTUAL_ENV}/bin/activate
+                            . ${VIRTUAL_ENV}/bin/activate
                             pytest
                         """
                     } catch (Exception e) {
