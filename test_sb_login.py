@@ -30,7 +30,7 @@ def test_sb_login(fixture_setup):
 
         password = wait.until(EC.presence_of_element_located(
             (By.XPATH, "/html/body/div[1]/div/div/div[2]/div/div/div/form/div[2]/input")))
-        password.send_keys("Aa123456@")
+        password.send_keys("Aa@123456")
         time.sleep(2)
 
         view_password_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR,
