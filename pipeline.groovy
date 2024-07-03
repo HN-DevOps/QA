@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'Staging Node Runner' }
 
-    environment {
+    environment { 
         VIRTUAL_ENV = 'env'
         GIT_URL = 'https://github.com/NajlaGIT/SB-twin.git'
         BRANCH = 'main'
